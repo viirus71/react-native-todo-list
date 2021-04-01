@@ -1,15 +1,30 @@
-import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { StyleSheet, KeyboardAvoidingView, TouchableOpacity, Text, View, StatusBar, TextInput } from 'react-native';
 import Task from './components/Task';
 
 function App() {
+  const [addTask, setAddTask] = useState([]);
+  const onPress = () => console.log(addTask);
+
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.title}>Todo today</Text>
       <View style={styles.tasksSection}>
         <Task text="Work out 30 minutes"></Task>
       </View>
-    </View>
+      <View style={styles.viewBottom}>
+      <TextInput style={styles.addTaskInput}
+        onChangeText={(value) => {
+          setAddTask(value)
+        }}></TextInput>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPress}
+      >
+      </TouchableOpacity>
+      </View>
+
+    </KeyboardAvoidingView>
   );
 }
 
@@ -30,6 +45,27 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingHorizontal: 20,
   },
+  addTaskInput: {
+    width: 246,
+    height: 45,
+    backgroundColor: '#FFFFFF',
+
+    borderRadius: 60,
+    marginLeft: 20
+  },
+  button: {
+    width: 60,
+    height: 60,
+    marginLeft: 20,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 52
+  },
+  viewBottom: {
+    marginTop: 470,
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  }
 });
 
 export default App;
